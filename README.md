@@ -46,7 +46,7 @@ git clone https://github.com/lephisto/pfsense-analytics.git
 cd pfsense-analytics
 ```
 
-We have to adjust some Systemlimits to allow Elasticsearch to run:
+We have to adjust some Systemlimits to allow [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/_maximum_map_count_check.html) to run:
 
 ```
 sudo sysctl -w vm.max_map_count=262144
