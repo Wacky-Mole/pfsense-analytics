@@ -70,6 +70,14 @@ A salt for encrypting your graylog passwords
 - GRAYLOG_PASSWORD_SECRET (Change that _now_)
 
 
+
+Get a [free license key](https://support.maxmind.com/account-faq/license-keys/how-do-i-generate-a-license-key/) for MaxMind geoIP info. Add your license key to ./Docker/graylog/getGeo.sh
+```
+cd ./Docker/graylog
+nano getGeo.sh
+```
+
+
 Finally, spin up the stack with:
 
 ```
@@ -77,7 +85,7 @@ cd ./Docker
 sudo docker-compose up -d
 ```
 
-Note: graylog will be built the first time you run docker-compose.  The below step is only for updating the GeiLite DB.
+Note: graylog will be built the first time you run docker-compose.  The below step is only for updating the GeoLite DB.
 To update the geolite.maxmind.com GeoLite2-City database, simply run:
 ```
 cd ./Docker
