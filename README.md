@@ -46,6 +46,13 @@ git clone https://github.com/lephisto/pfsense-analytics.git
 cd pfsense-analytics
 ```
 
+Let's [configure docker to start on boot](https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot).
+```
+systemctl status docker
+systemctl enable docker
+systemctl status docker
+```
+
 We have to adjust some Systemlimits to allow [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/_maximum_map_count_check.html) to run:
 
 ```
