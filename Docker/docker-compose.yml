@@ -5,6 +5,7 @@ services:
   # MongoDB: https://hub.docker.com/_/mongo/
   mongodb:
     image: mongo:3
+    restart: always
     volumes:
       - mongo_data:/data/db
 
@@ -26,6 +27,7 @@ services:
 
   # Graylog: https://hub.docker.com/r/graylog/graylog/
   graylog:
+    restart: always
     build: 
       context: ./graylog/.
     volumes:
@@ -58,6 +60,7 @@ services:
   # Kibana : https://www.elastic.co/guide/en/kibana/6.8/index.html
   kibana:
     image: docker.elastic.co/kibana/kibana-oss:6.8.5
+    restart: always
     env_file:
       - kibana.env
     depends_on:
@@ -79,6 +82,7 @@ services:
 
   influxdb:
     image: 'influxdb:latest'
+    restart: always
     env_file:
       - ./influxdb.env
     ports:
@@ -92,6 +96,7 @@ services:
 
   grafana:
     image: grafana/grafana:latest
+    restart: always
     env_file:
       - ./grafana.env
     ports:

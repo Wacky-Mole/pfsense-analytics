@@ -46,7 +46,14 @@ git clone https://github.com/lephisto/pfsense-analytics.git
 cd pfsense-analytics
 ```
 
-We have to adjust some Systemlimits to allow Elasticsearch to run:
+Let's [configure docker to start on boot](https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot).
+```
+systemctl status docker
+systemctl enable docker
+systemctl status docker
+```
+
+We have to adjust some Systemlimits to allow [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/_maximum_map_count_check.html) to run:
 
 ```
 sudo sysctl -w vm.max_map_count=262144
@@ -61,13 +68,21 @@ vm.max_map_count=262144
 Next edit the ./Docker/graylog.env file and set some values:
 
 Set the proper Time Zone: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-- GRAYLOG_TIMEZONE=Europe/Berlin
+- GRAYLOG_TIMEZONE=America/Los_Angeles
 
 The URL you want your graylog to be available under:
 - GRAYLOG_HTTP_EXTERNAL_URI (eg: http://localhost:9000)
 
 A salt for encrypting your graylog passwords
 - GRAYLOG_PASSWORD_SECRET (Change that _now_)
+
+
+
+Get a [free license key](https://support.maxmind.com/account-faq/license-keys/how-do-i-generate-a-license-key/) for MaxMind geoIP info. Add your license key to ./Docker/graylog/getGeo.sh
+```
+cd ./Docker/graylog
+nano getGeo.sh
+```
 
 
 Finally, spin up the stack with:
@@ -77,7 +92,7 @@ cd ./Docker
 sudo docker-compose up -d
 ```
 
-Note: graylog will be built the first time you run docker-compose.  The below step is only for updating the GeiLite DB.
+Note: graylog will be built the first time you run docker-compose.  The below step is only for updating the GeoLite DB.
 To update the geolite.maxmind.com GeoLite2-City database, simply run:
 ```
 cd ./Docker
